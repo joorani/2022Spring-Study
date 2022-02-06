@@ -1,5 +1,7 @@
-package com.example.study01;
+package com.example.study01.controller;
 
+import com.example.study01.dto.MovieResponseDto;
+import com.example.study01.service.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

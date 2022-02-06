@@ -1,8 +1,10 @@
-package com.example.study01;
+package com.example.study01.service;
 
+import com.example.study01.model.Movie;
+import com.example.study01.dto.MovieResponseDto;
+import com.example.study01.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +21,8 @@ public class MovieService {
         List<Movie> movieList = movieRepository.findByQuery(title);
 
         return movieList.stream()
+                .filter(m -> m.getUserRating() != 0.0f)
+                .sorted((a, b) -> b.getUserRating() > a.getUserRating()? 1: -1)
                 .map(m -> MovieResponseDto.builder()
                         .title(m.getTitle())
                         .link(m.getLink())

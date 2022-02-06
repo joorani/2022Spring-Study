@@ -1,8 +1,10 @@
-package com.example.study01;
+package com.example.study01.repository;
 
+import com.example.study01.model.Movie;
 import com.example.study01.config.NaverProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -14,16 +16,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class MovieRepositoryImpl implements MovieRepository {
 
     private final RestTemplate restTemplate;
     private final NaverProperties naverProperties;
-
-    public MovieRepositoryImpl(RestTemplate restTemplate, NaverProperties naverProperties) {
-        this.restTemplate = restTemplate;
-        this.naverProperties = naverProperties;
-    }
-
 
     @Override
     public List<Movie> findByQuery(String query) {
@@ -36,7 +33,6 @@ public class MovieRepositoryImpl implements MovieRepository {
         return restTemplate.exchange(url, HttpMethod.GET, new HttpEntity(httpHeaders), ResponseMovie.class)
                 .getBody().getItems()
                 .stream()
-                .sorted((a, b) -> b.getUserRating() > a.getUserRating()? 1: -1)
                 .map(m -> Movie.builder()
                         .title(m.title)
                         .link(m.link)
