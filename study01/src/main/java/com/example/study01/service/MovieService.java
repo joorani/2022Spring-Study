@@ -34,6 +34,10 @@ public class MovieService {
                         .title(m.getTitle())
                         .link(m.getLink())
                         .userRating(m.getUserRating())
+                        .image(m.getImage())
+                        .subtitle(m.getSubtitle())
+                        .director(m.getDirector())
+                        .pubDate(m.getPubDate())
                         .build())
                 .collect(Collectors.toList());
     }

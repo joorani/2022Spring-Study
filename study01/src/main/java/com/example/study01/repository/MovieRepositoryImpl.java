@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +38,12 @@ public class MovieRepositoryImpl implements MovieRepository {
                 .map(m -> Movie.builder()
                         .title(m.title)
                         .link(m.link)
-                        .userRating(m.userRating).build())
+                        .userRating(m.userRating)
+                        .image(m.image)
+                        .subtitle(m.subtitle)
+                        .director(m.director)
+                        .pubDate(m.pubDate)
+                        .build())
                 .collect(Collectors.toList());
 
     }
@@ -55,6 +61,11 @@ public class MovieRepositoryImpl implements MovieRepository {
             private String title;
             private String link;
             private float userRating;
+            private String image;
+            private String subtitle;
+            private String director;
+            private Date pubDate;
+
         }
     }
 }
