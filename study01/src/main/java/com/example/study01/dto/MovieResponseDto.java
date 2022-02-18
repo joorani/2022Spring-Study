@@ -15,4 +15,5 @@ public class MovieResponseDto {
     private String link;
     private float userRating;
 
+    //dto
 }
