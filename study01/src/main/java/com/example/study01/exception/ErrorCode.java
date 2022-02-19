@@ -1,19 +1,22 @@
 package com.example.study01.exception;
 
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
+
+import static org.springframework.http.HttpStatus.*;
 
 @Getter
 public enum ErrorCode {
 
-    INTERNAL_SERVER_ERROR(500, "internal_server_error", " INTERNAL SERVER ERROR.");
+    NOT_FOUND_MOVIES(NOT_FOUND, "404", "검색결과가 없습니다.");
 
-    private final int status;
-    private final String code;
-    private final String message;
+    private final HttpStatus httpStatus;
+    private final String errorCode;
+    private final String errorMessage;
 
-    ErrorCode(int status, String code, String message) {
-        this.status = status;
-        this.code = code;
-        this.message = message;
+    ErrorCode(HttpStatus httpStatus, String errorCode, String errorMessage) {
+        this.httpStatus = httpStatus;
+        this.errorCode = errorCode;
+        this.errorMessage = errorMessage;
     }
 }

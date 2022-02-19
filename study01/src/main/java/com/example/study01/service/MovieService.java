@@ -1,5 +1,7 @@
 package com.example.study01.service;
 
+import com.example.study01.exception.ErrorCode;
+import com.example.study01.exception.SearchNotFoundException;
 import com.example.study01.model.Movie;
 import com.example.study01.dto.MovieResponseDto;
 import com.example.study01.repository.MovieRepository;
@@ -24,7 +26,7 @@ public class MovieService {
 
         //예외처리 test 위해 의도적으로 에러발생시키기
         if(movieList.isEmpty()) {
-            throw new RuntimeException("검색 결과가 없습니다.");
+            throw new SearchNotFoundException(ErrorCode.NOT_FOUND_MOVIES);
         }
 
         return movieList.stream()

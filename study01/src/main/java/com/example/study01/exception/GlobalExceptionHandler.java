@@ -5,23 +5,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = {RuntimeException.class})
-    protected ResponseEntity<CommonResponse> handleRuntimeException(RuntimeException e) {
+    @ExceptionHandler(value = {SearchNotFoundException.class})
+    public ResponseEntity<ErrorResponse> handleSearchNotFoundException(SearchNotFoundException e) {
 
-        log.info("handleRuntimeException", e);
-
-        CommonResponse response = CommonResponse.builder()
-                .code(ErrorCode.INTERNAL_SERVER_ERROR.getCode())
-                .message(e.getMessage())
-                .status(ErrorCode.INTERNAL_SERVER_ERROR.getStatus())
-                .build();
-
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return ErrorResponse.toResponseEntity(ErrorCode.NOT_FOUND_MOVIES);
     }
 
 
