@@ -19,6 +19,6 @@ public class MovieResponseDto {
     private String image;
     private String subtitle;
     private String director;
-    private Date pubDate;
+    private boolean latestMovie;
 
 }

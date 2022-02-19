@@ -8,12 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,7 +62,7 @@ public class MovieRepositoryImpl implements MovieRepository {
             private String image;
             private String subtitle;
             private String director;
-            private Date pubDate;
+            private Integer pubDate;
 
         }
     }

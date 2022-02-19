@@ -37,8 +37,10 @@ public class MovieService {
                         .image(m.getImage())
                         .subtitle(m.getSubtitle())
                         .director(m.getDirector())
-                        .pubDate(m.getPubDate())
+                        .latestMovie(m.isThisYearMovie(m.getPubDate()))
                         .build())
                 .collect(Collectors.toList());
     }
+
+
 }

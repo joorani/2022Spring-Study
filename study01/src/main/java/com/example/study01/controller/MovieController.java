@@ -20,4 +20,6 @@ public class MovieController {
     public ResponseEntity<List<MovieResponseDto>> searchMovie(@RequestParam(name = "q") String title) {
         return ResponseEntity.ok().body(movieService.search(title));
     }
+
+
 }
