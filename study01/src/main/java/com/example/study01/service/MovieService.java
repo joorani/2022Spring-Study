@@ -4,14 +4,12 @@ import com.example.study01.exception.ErrorCode;
 import com.example.study01.exception.SearchNotFoundException;
 import com.example.study01.model.Movie;
 import com.example.study01.dto.MovieResponseDto;
+import com.example.study01.model.MovieGroup;
 import com.example.study01.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,22 +22,24 @@ public class MovieService {
 
         List<Movie> movieList = movieRepository.findByQuery(title);
 
+        //일급컬렉션 적용해보기
+        MovieGroup movieGroup = new MovieGroup(movieList);
+        List<Movie> movieGroupList = movieGroup.sortMovieList();
+
         //예외처리 test 위해 의도적으로 에러발생시키기
-        if(movieList.isEmpty()) {
+        if(movieGroupList.isEmpty()) {
             throw new SearchNotFoundException(ErrorCode.NOT_FOUND_MOVIES);
         }
 
-        return movieList.stream()
-                .filter(m -> m.getUserRating() != 0.0f)
-                .sorted((a, b) -> b.getUserRating() > a.getUserRating()? 1: -1)
-                .map(m -> MovieResponseDto.builder() //modelMapper 사용
+        return movieGroupList.stream()
+                .map(m -> MovieResponseDto.builder()
                         .title(m.getTitle())
                         .link(m.getLink())
                         .userRating(m.getUserRating())
                         .image(m.getImage())
                         .subtitle(m.getSubtitle())
                         .director(m.getDirector())
-                        .latestMovie(m.isThisYearMovie(m.getPubDate()))
+                        .latestMovie(m.isThisYearMovie())
                         .build())
                 .collect(Collectors.toList());
     }

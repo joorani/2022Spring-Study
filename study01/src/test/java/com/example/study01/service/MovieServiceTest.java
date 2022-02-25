@@ -13,18 +13,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -82,10 +78,10 @@ class MovieServiceTest {
     private List<Movie> getStubMovieList() {
 
         return Arrays.asList(
-                Movie.builder().title("해리포터 1").userRating(9.3f).build(),
-                Movie.builder().title("해리포터 2").userRating(9.7f).build(),
-                Movie.builder().title("해리포터 3").userRating(0.0f).build(),
-                Movie.builder().title("해리포터 4").userRating(7.5f).build()
+                Movie.builder().title("해리포터 1").userRating(9.3f).pubDate(2011).build(),
+                Movie.builder().title("해리포터 2").userRating(9.7f).pubDate(2011).build(),
+                Movie.builder().title("해리포터 3").userRating(0.0f).pubDate(2011).build(),
+                Movie.builder().title("해리포터 4").userRating(7.5f).pubDate(2011).build()
         );
     }
 }

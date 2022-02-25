@@ -1,11 +1,7 @@
 package com.example.study01.model;
 
 import lombok.*;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Date;
 
 @Builder
 @AllArgsConstructor
@@ -21,7 +17,7 @@ public class Movie {
     private String director;
     private Integer pubDate;
 
-    public boolean isThisYearMovie(Integer pubDate) {
+    public boolean isThisYearMovie() {
         Calendar cal = Calendar.getInstance();
         int thisYear = cal.get(Calendar.YEAR);
 
